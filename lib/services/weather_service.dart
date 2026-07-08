@@ -7,14 +7,14 @@ class WeatherService {
   Future<String> _getLocation() async {
     final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return Future.error("Məkan Servisi Bağlıdır");
+      return Future.error("Location services are disabled.");
     }
 
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error("Məkan icazəsi verməlisiniz");
+        return Future.error("Location permission is required.");
       }
     }
 
@@ -26,7 +26,7 @@ class WeatherService {
 
     final String? city = placemark[0].locality;
 
-    if (city == null) return Future.error("Bir problem oldu");
+    if (city == null) return Future.error("Unable to determine your city.");
 
     return city; 
   }
@@ -34,14 +34,14 @@ class WeatherService {
   Future<List<WeatherModel>> getWeatherData() async {
     final String city = await _getLocation();
 
-    final String url = 
-        "https://api.collectapi.com/weather/getWeather?lang=az&city=$city";
-        
+    final String url =
+        "https://api.collectapi.com/weather/getWeather?lang=en&city=$city";
+
     const String apiKey = String.fromEnvironment('COLLECT_API_KEY');
 
-    const Map<String, dynamic> headers = {
-      "authorization": apiKey,
-      "content-type" : "application/json"
+    final headers = {
+      "authorization": "apikey $apiKey",
+      "content-type": "application/json",
     };
 
     final dio = Dio();
@@ -49,7 +49,7 @@ class WeatherService {
     final response = await dio.get(url, options: Options(headers: headers));
 
     if (response.statusCode != 200) {
-      return Future.error("Bir problem oldu");
+      return Future.error("Failed to fetch weather data.");
     }
 
     final List list = response.data;

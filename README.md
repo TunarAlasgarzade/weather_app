@@ -1,20 +1,44 @@
-# Weather App 🌤️
+# Weather App
 
-This project is a 7-day weather application built with Flutter, specifically created as a practical project to learn and master the Flutter framework and Dart programming language.
+A simple 7-day weather forecast application built with Flutter.
+It automatically detects the user's current location and displays the weather forecast for the next seven days.
 
-## 🚀 How It Works
-- **Location Based:** The app fetches the user's current city automatically using GPS coordinates.
-- **Dynamic API requests:** It sends the city name to CollectAPI to get the latest 7-day weather forecast.
-- **Secure Architecture:** The API key is kept completely out of the codebase for security.
+## Features
 
-## 🛠️ Tech Stack & Packages
-- **Flutter & Dart**
-- **Dio** (For HTTP requests)
-- **Geolocator & Geocoding** (For location services)
+- Automatically detects the user's current city
+- Displays a 7-day weather forecast
+- Shows:
+  - Current temperature
+  - Minimum temperature
+  - Maximum temperature
+  - Night temperature
+  - Humidity
+  - Weather icon
+- API key is securely injected using `--dart-define`
 
-## 💻 How to Run Locally
+## Tech Stack
 
-To run the app on your local machine, you must provide your CollectAPI key via the terminal:
+- Flutter
+- Dart
+- Dio
+- Geolocator
+- Geocoding
+- CollectAPI
+
+## Getting Started
+
+Install dependencies:
 
 ```bash
-flutter run --dart-define=COLLECT_API_KEY="YOUR_API_KEY_HERE"
+flutter pub get
+```
+
+Run the app:
+
+```bash
+flutter run --dart-define=COLLECT_API_KEY=YOUR_API_KEY
+```
+
+## Screenshot
+
+![Home Screen](assets/screenshots/home.png)

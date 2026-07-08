@@ -27,23 +27,22 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-          itemCount: _weathers.length,
-          itemBuilder: (context, index) {
-            final WeatherModel weather = _weathers[index];
-            
-            return Container(
-              padding: const EdgeInsets.all(20),
-              margin: const EdgeInsets.all(20),
-              decoration: BoxDecoration(color: Colors.blueGrey.shade50, 
-              borderRadius: BorderRadius.circular(10)
-              ),
-              child: Column(
-                children: [
-                Image.network(weather.logo, width: 100,),
+        itemCount: _weathers.length,
+        itemBuilder: (context, index) {
+          final WeatherModel weather = _weathers[index];
+          return Container(
+            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
+            decoration: BoxDecoration(color: Colors.blueGrey.shade50, 
+            borderRadius: BorderRadius.circular(10)
+            ),
+            child: Column(
+              children: [
+                Image.network(weather.icon, width: 100,),
                 Padding(
                   padding: const EdgeInsets.only(top: 15, bottom: 25),
                   child: Text(
-                    "${weather.gun}\n ${weather.status.toUpperCase()} ${weather.derece}°",
+                    "${weather.day}\n ${weather.description.toUpperCase()} ${weather.degree}°",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18, 
@@ -56,27 +55,26 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                  Text ("min: ${weather.min}°"),
-                  Text ("max: ${weather.max}°"),
-                ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                  Text ("Gecə: ${weather.gece}°"),
-                  Text ("Nəm: ${weather.nem}°"),
-                ],
-                )
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text ("Min: ${weather.min}°"),
+                        Text ("Max: ${weather.max}°"),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text ("Night: ${weather.night}°"),
+                        Text ("Humidity: ${weather.humidity}%"),
+                      ],
+                    )
                   ],
                 )
               ],
-             ),
-            );
-          }
-        )
-      
+            ),
+          );
+        }
+      )
     );
   }
 }
